@@ -1,0 +1,8 @@
+const CartActionTypes = {
+  INCR_QUANITY: "INCR_QUANITY",
+  DECR_QUANTITY: "DECR_QUANTITY",
+  CLEAR_ITEM: "CLEAR_ITEM",
+  SET_SELECTED_PIN_CODE: "SET_SELECTED_PIN_CODE",
+};
+
+export default CartActionTypes;

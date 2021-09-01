@@ -1,0 +1,41 @@
+.container {
+  max-width: 80vw;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.shopcart {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__title {
+    font-size: 2.8rem;
+    font-family: inherit;
+    font-weight: 400;
+  }
+
+  &__container {
+    background-color: #fff;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 30% 30%;
+  column-gap: 40%;
+  margin-bottom: 5%;
+
+  .delivery {
+  }
+
+  .summary {
+  }
+}
