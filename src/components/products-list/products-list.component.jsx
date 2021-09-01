@@ -122,7 +122,9 @@ const ProductsList = (props) => {
             height="15"
           />
         </button>
-        <p>{quantity || 0}</p>
+        <p style={{ border: "1px solid #e7e7e7", padding: "0.5rem" }}>
+          {quantity || 0}
+        </p>
         <button
           type="button"
           onClick={() => dispatch(incrementQuantity(props.product))}
