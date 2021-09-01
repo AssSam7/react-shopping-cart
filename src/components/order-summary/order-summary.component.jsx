@@ -70,9 +70,9 @@ const calculateFinalTotal = (total, discount, shipping) => {
   if (discount && !(shipping > 0)) {
     return total - discount;
   } else if (!discount && shipping > 0) {
-    return total - shipping;
+    return total + shipping;
   } else if (discount && shipping > 0) {
-    return total - discount - shipping;
+    return total - discount + shipping;
   }
   return total;
 };
