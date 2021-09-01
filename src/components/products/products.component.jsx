@@ -12,6 +12,10 @@ const ProductsHeader = styled.div`
   grid-template-columns: 3fr 1fr 1fr 1fr;
   column-gap: 2rem;
   align-items: center;
+
+  @media only screen and (max-width: 420px) {
+    display: none;
+  }
 `;
 
 const Products = ({ products }) => (

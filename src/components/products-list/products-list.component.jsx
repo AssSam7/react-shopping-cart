@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { useMediaQuery } from "beautiful-react-hooks";
 
 import Tag from "../tags/tags.component";
 import {
@@ -17,6 +18,10 @@ const ProductWrapper = styled.div`
 
   &:not(:last-child) {
     border-bottom: 1px solid #e7e7e7;
+  }
+
+  @media only screen and (max-width: 420px) {
+    grid-template-columns: 3fr 1fr 1fr;
   }
 `;
 
@@ -77,7 +82,8 @@ const QuantityWrapper = styled.div`
 `;
 
 const ProductsList = (props) => {
-  const { name, price, desc, tagline, quantity, subTotal, gift } =
+  const isMobile = useMediaQuery("(max-width: 420px)");
+  const { name, price, desc, tagline, planLink, quantity, subTotal, gift } =
     props.product;
   const { dispatch } = props;
 
@@ -88,7 +94,19 @@ const ProductsList = (props) => {
         <ProductContentWrapper>
           {tagline && <Tag type={"normal"} content={tagline} />}
           <ProductName>{name}</ProductName>
-          <ProductDesc>{desc}</ProductDesc>
+          <ProductDesc>
+            {desc.includes("Extended Warranty") ? (
+              <>
+                <span>{desc.replace("Extended Warranty", "")}</span> <br />
+                <p style={{ display: "flex", gap: "0.5rem" }}>
+                  <span>Extended Warranty</span>
+                  <a href={planLink}>View Plan</a>
+                </p>
+              </>
+            ) : (
+              <span>{desc}</span>
+            )}
+          </ProductDesc>
         </ProductContentWrapper>
       </ProductTitleWrapper>
       <p>{price} $</p>
@@ -97,14 +115,24 @@ const ProductsList = (props) => {
           type="button"
           onClick={() => dispatch(decrementQuantity(props.product))}
         >
-          <img src="/assets/icons/minus.png" alt="Decrement" />
+          <img
+            src="/assets/icons/minus.png"
+            alt="Decrement"
+            width="15"
+            height="15"
+          />
         </button>
         <p>{quantity || 0}</p>
         <button
           type="button"
           onClick={() => dispatch(incrementQuantity(props.product))}
         >
-          <img src="/assets/icons/plus.png" alt="Increment" />
+          <img
+            src="/assets/icons/plus.png"
+            alt="Increment"
+            width="15"
+            height="15"
+          />
         </button>
       </QuantityWrapper>
       <div
@@ -116,11 +144,13 @@ const ProductsList = (props) => {
         }}
       >
         <p>{subTotal || 0} $</p>
-        <img
-          src="/assets/icons/DELETE.png"
-          alt="Delete"
-          onClick={() => dispatch(clearItemFromCart(props.product))}
-        />
+        {!isMobile && (
+          <img
+            src="/assets/icons/DELETE.png"
+            alt="Delete"
+            onClick={() => dispatch(clearItemFromCart(props.product))}
+          />
+        )}
       </div>
       {gift && (
         <ProductGiftWrapper>

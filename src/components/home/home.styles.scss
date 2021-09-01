@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: column;
   gap: 4rem;
+
+  @media only screen and (max-width: 420px) {
+    max-width: 100vw;
+  }
 }
 
 .shopcart {
@@ -33,9 +37,14 @@
   column-gap: 40%;
   margin-bottom: 5%;
 
-  .delivery {
+  @media only screen and (max-width: 1000px) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5%;
   }
 
-  .summary {
+  @media only screen and (max-width: 420px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr;
+    row-gap: 2rem;
   }
 }

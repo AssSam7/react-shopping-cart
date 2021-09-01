@@ -30,6 +30,22 @@ const CommonWrapper = styled.div`
   align-items: center;
 `;
 
+const CheckoutWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media only screen and (max-width: 1000px) {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    align-items: center;
+  }
+`;
+
 const PrimaryText = styled.h1`
   font-weight: 500;
 `;
@@ -96,13 +112,13 @@ const OrderSummary = (props) => {
             $
           </PrimaryText>
         </CommonWrapper>
-        <CommonWrapper>
+        <CheckoutWrapper>
           <Button content="Continue Shopping" isTransparent />
           <Button
             content="Checkout"
             isDisabled={standardShipping === "Not Available"}
           />
-        </CommonWrapper>
+        </CheckoutWrapper>
       </SummaryContainer>
     </OrderSummaryContainer>
   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Modal from "react-modal";
+import { useMediaQuery } from "beautiful-react-hooks";
 
 import { setSelectedPinCode } from "../../redux/cart/cart.actions";
 
@@ -11,6 +12,11 @@ const DeliveryContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media only screen and (max-width: 420px) {
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+  }
 `;
 
 const Title = styled.h3`
@@ -42,9 +48,10 @@ const Input = styled.input`
 `;
 
 const ChangeHyperLink = styled.a`
-  color: #6c5ce7;
+  color: #341f97;
   text-transform: uppercase;
   text-decoration: none;
+  font-weight: 500;
 
   &:active {
     text-decoration: none;
@@ -54,9 +61,6 @@ const ChangeHyperLink = styled.a`
 const DataWrapper = styled.div`
   margin-top: 0.5rem;
   width: 100%;
-  /* display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
-  column-gap: 2rem; */
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -123,23 +127,56 @@ const ChangeButton = styled.button`
 `;
 
 const DeliveryAvailability = (props) => {
+  const isMobile = useMediaQuery("(max-width: 420px)");
+  const isTablet = useMediaQuery("(max-width: 1000px)");
+
   const { delivery, selectedPinCode, dispatch } = props;
   let pinCodes = Object.keys(delivery);
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  // const [selectedPinCode, setSelectedPinCode] = useState("560066");
 
-  const customStyles = {
-    content: {
-      width: "30vw",
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-  };
+  let customStyles = null;
+
+  if (isMobile) {
+    console.log("In Mobile");
+    customStyles = {
+      content: {
+        width: "80vw",
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+      },
+    };
+  } else if (isTablet) {
+    console.log("In Tablet");
+    customStyles = {
+      content: {
+        width: "40vw",
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+      },
+    };
+  } else {
+    console.log("In Desktop");
+    customStyles = {
+      content: {
+        width: "30vw",
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+      },
+    };
+  }
 
   function openModal() {
     setIsOpen(true);

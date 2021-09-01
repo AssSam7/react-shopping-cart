@@ -1,4 +1,6 @@
 import { connect } from "react-redux";
+import { useMediaQuery } from "beautiful-react-hooks";
+
 import Products from "../products/products.component";
 
 import {
@@ -14,10 +16,11 @@ import DeliveryAvailability from "../delivery-availability/delivery-availability
 import DiscountNotification from "../discount-notification/discount-notification.component";
 
 const Home = (props) => {
-  console.log("props", props);
+  const isMobile = useMediaQuery("(max-width: 420px)");
+
   return (
     <div className="container">
-      {props.discount && <DiscountNotification />}
+      {props.discount && !isMobile && <DiscountNotification />}
       <div className="shopcart">
         <h1 className="shopcart__title">Shopping cart</h1>
         <div className="shopcart__container">
