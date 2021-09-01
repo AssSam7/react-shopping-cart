@@ -11,11 +11,13 @@ import {
 import "./home.styles.scss";
 import OrderSummary from "../order-summary/order-summary.component";
 import DeliveryAvailability from "../delivery-availability/delivery-availability.component";
+import DiscountNotification from "../discount-notification/discount-notification.component";
 
 const Home = (props) => {
   console.log("props", props);
   return (
     <div className="container">
+      {props.discount && <DiscountNotification />}
       <div className="shopcart">
         <h1 className="shopcart__title">Shopping cart</h1>
         <div className="shopcart__container">
